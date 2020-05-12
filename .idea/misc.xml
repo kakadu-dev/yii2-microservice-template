@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="PhpEntryPointsManager">
+    <pattern value="\console\controllers\*Controller" />
+    <pattern value="\console\controllers\*Controller" member="action*" />
+    <pattern value="\console\modules\*\controllers\*Controller" />
+    <pattern value="\console\modules\*\controllers\*Controller" member="action*" />
+  </component>
+</project>

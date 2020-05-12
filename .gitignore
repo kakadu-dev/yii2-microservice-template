@@ -4,7 +4,19 @@
 /yii_test.bat
 
 # phpstorm project files
-.idea
+ idea
+.idea/*
+!.gitignore
+!.idea/runConfigurations/
+!.idea/inspectionProfiles/
+!.idea/codeStyles/
+!.idea/encodings.xml
+!.idea/sqldialects.xml
+!.idea/misc.xml
+!.idea/webResources.xml
+!.idea/yii2settings.xml
+!.idea/watchers.xml
+!.idea/watcherTasks.xml
 
 # netbeans project files
 nbproject
