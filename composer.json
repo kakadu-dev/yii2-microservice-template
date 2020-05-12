@@ -1,0 +1,58 @@
+{
+    "name": "kakadu-dev/yii2-ijson-microservice-template",
+    "description": "Yii2 Inverted JSON Microservice Template",
+    "keywords": [
+        "yii2",
+        "framework",
+        "advanced",
+        "template",
+        "microservice",
+        "ijson",
+        "inverted",
+        "json"
+    ],
+    "homepage": "https://github.com/kakadu-dev/yii2-ijson-microservice-template",
+    "type": "templating",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/kakadu-dev/yii2-ijson-microservice-template/issues?state=open",
+        "source": "https://github.com/kakadu-dev/yii2-ijson-microservice-template"
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.4.0",
+        "kakadu-dev/php-ijson-microservices": "^1.0.1",
+        "kakadu-dev/yii2-kakadu-helpers": "^1.2",
+        "yiisoft/yii2": "2.0.35"
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.0",
+        "codeception/module-asserts": "^1.0",
+        "codeception/module-yii2": "^1.0",
+        "codeception/module-filesystem": "^1.0",
+        "codeception/verify": "~0.5.0 || ~1.1.0",
+        "symfony/browser-kit": ">=2.7 <=4.2.4"
+    },
+    "config": {
+        "process-timeout": 1800,
+        "fxp-asset": {
+            "enabled": false
+        },
+        "sort-packages": true
+    },
+    "provide": {
+        "bower-asset/jquery": "*",
+        "bower-asset/inputmask": "*",
+        "bower-asset/punycode": "*",
+        "bower-asset/yii2-pjax": "*",
+        "bower-asset/bootstrap": "*",
+        "bower-asset/typeahead.js": "*",
+        "bower-asset/jquery.inputmask": "*"
+    },
+    "repositories": [
+        {
+            "type": "github",
+            "url": "https://github.com/kakadu-dev/yii2-kakadu-helpers"
+        }
+    ]
+}
