@@ -18,8 +18,8 @@ use console\modules\rpc\components\BaseRpcController;
  */
 class DemoController extends BaseRpcController
 {
-    public function actionHello()
+    public function actionHello(int $test)
     {
-        return ['Hello' => 'World'];
+        return ['Hello' => $test];
     }
 }
