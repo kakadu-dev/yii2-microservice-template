@@ -20,3 +20,6 @@ ENVIRONMENT (pass via shell):
 IJSON - Inverted JSON host:port
 PROJECT_ALIAS - Project alias for microservice
 ```
+
+Tests:
+Import Watcher task from ```.idea/watcherTasks.xml``` for autotests or ```codecept run```
