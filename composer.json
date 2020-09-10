@@ -23,7 +23,8 @@
         "php": ">=7.4.0",
         "kakadu-dev/php-ijson-microservices": "^1.0.1",
         "kakadu-dev/yii2-kakadu-helpers": "^1.2",
-        "yiisoft/yii2": "2.0.35"
+        "yiisoft/yii2": "2.0.35",
+        "matthew-p/yii2-extended-api": "^2.0.0"
     },
     "require-dev": {
         "codeception/codeception": "^4.0",

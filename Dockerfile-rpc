@@ -1,0 +1,62 @@
+FROM matthewpatell/universal-docker-server-php-fpm:4.0
+
+MAINTAINER Yarmaliuk Mikhail <lukomi@mail.ru>
+
+# Utils
+RUN apt-get update -y --fix-missing \
+    && apt-get install -y \
+            mc \
+            nano \
+            cron rsyslog \
+            curl wget \
+            supervisor \
+    # Supervisor log
+    && mkdir -p /var/log/supervisord \
+    # Fix terminal
+    && echo "export TERM=xterm mc" >> ~/.bashrc
+
+ENV WEB_PATH=/var/www
+ENV ENVIRONMENT=Development
+
+RUN mkdir -p $WEB_PATH
+
+WORKDIR $WEB_PATH
+
+# Copy app
+COPY ./common $WEB_PATH/common
+COPY ./console $WEB_PATH/console
+COPY ./environments $WEB_PATH/environments
+COPY ./vendor $WEB_PATH/vendor
+COPY ./functions.php $WEB_PATH/functions.php
+COPY ./init $WEB_PATH/init
+
+# Copy cron file
+COPY ./docker/cron/server/tasks /var/spool/cron/crontabs/root
+
+# Copy php files
+COPY ./vendor/matthew-p/docker-server/docker/php/php.ini /etc/php/7.4/cli/php.ini
+COPY ./vendor/matthew-p/docker-server/docker/php/php.ini /etc/php/7.4/fpm/php.ini
+COPY ./vendor/matthew-p/docker-server/docker/php/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
+COPY ./vendor/matthew-p/docker-server/docker/php/pool.d /etc/php/7.4/fpm/pool.d
+COPY ./vendor/matthew-p/docker-server/docker/php/mods-available/xdebug.ini /etc/php/7.4/mods-available/xdebug.ini
+
+# Copy supervisor
+COPY ./vendor/matthew-p/docker-server/docker/supervisord/supervisord.conf /etc/supervisor/supervisord.conf
+COPY ./vendor/matthew-p/docker-server/docker/supervisord/server/services/2.rsyslogd.conf /etc/supervisor/conf.d/2.rsyslogd.conf
+COPY ./vendor/matthew-p/docker-server/docker/supervisord/server/services/3.cron.conf /etc/supervisor/conf.d/3.cron.conf
+COPY ./docker/supervisord/server/services/4.queue.conf /etc/supervisor/conf.d/4.queue.conf
+
+# Create log dirs & cleanup
+RUN chmod 0600 /var/spool/cron/crontabs/root \
+    && rm -rf $WEB_PATH/vendor/matthew-p/docker-server \
+    && mkdir -p /var/log/cron \
+    && mkdir -p /var/log/php7.4-fpm \
+    && mkdir -p /var/log/supervisord
+
+# PASS IJSON, PROJECT_ALIAS, ENVIRONMENT (Production,Development)
+CMD php init --env=$ENVIRONMENT --overwrite=y \
+    && php yii start/configure \
+    && php yii rbac/init \
+    && php yii migrate --interactive=0 \
+    && php yii start/seeder \
+    && php yii start
